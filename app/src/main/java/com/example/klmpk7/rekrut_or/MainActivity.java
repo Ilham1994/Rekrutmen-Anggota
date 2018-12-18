@@ -4,20 +4,31 @@ import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.graphics.Movie;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.provider.MediaStore;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.klmpk7.rekrut_or.Adapter.AnggotaAdapter;
 import com.example.klmpk7.rekrut_or.database.AppDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
     RecyclerView mRecyclerview;
     AnggotaAdapter mAdapter;
     AppDatabase databaseAnggota;
+    ImageView image, refresh;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
-        Toast.makeText(MainActivity.this, "GAGAGAGAGAGAGAL", Toast.LENGTH_SHORT).show();
+
+        Toast.makeText(MainActivity.this, "Silahkan dilihat", Toast.LENGTH_SHORT).show();
         mAdapter = new AnggotaAdapter();
         mAdapter.setHandler(this);
 
@@ -62,13 +77,43 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         getAnggotaSekarangList();
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tambah, menu);
 
-//    public boolean onOptionsItemSelected(MenuItem item)
-//    {
-//
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_tambah:
+                getFormInput();
+                break;
+            case R.id.menu_refresh:
+                SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
+                int mode = preferences.getInt("last_seen_key", 1);
+                if (mode==1){
+                    getAnggotaSekarangList();
+                }
+                break;
+        }
+         return super.onOptionsItemSelected(item);
+    }
+
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode == RESULT_OK){
+//            Bitmap bitmap = (Bitmap)data.getExtras().get("data");
+//            image.setImageBitmap(bitmap);
+//            refresh.setImageBitmap(bitmap);
+//        }
 //    }
+    private void getFormInput() {
+        Intent insertActivityIntent = new Intent(this, TambahData.class);
+        startActivity(insertActivityIntent);
+    }
 
     @Override
     public void click(Anggota anggota)
@@ -83,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         progressBar.setVisibility(View.VISIBLE);
         mRecyclerview.setVisibility(View.INVISIBLE);
 
-//        if(isConnected() == true)
-//        {
             //Ambil Data
             apiAnggotaClient client = (new Retrofit.Builder()
                     .baseUrl("https://cryptic-ridge-20830.herokuapp.com/")
