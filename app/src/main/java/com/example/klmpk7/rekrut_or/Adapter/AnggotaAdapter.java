@@ -46,9 +46,8 @@ public class AnggotaAdapter extends RecyclerView.Adapter<AnggotaAdapter.AnggotaH
     public void onBindViewHolder(@NonNull AnggotaHolder holder, int i)
     {
         Anggota anggota = dataAnggota.get(i);
-        holder.id.setText(anggota.id);
         holder.nama.setText(anggota.nama);
-
+        holder.nim.setText(anggota.nim);
         //gambar
 //        Glide.with(holder.itemView).load
     }
@@ -65,13 +64,13 @@ public class AnggotaAdapter extends RecyclerView.Adapter<AnggotaAdapter.AnggotaH
 
     public class AnggotaHolder extends RecyclerView.ViewHolder
     {
-        TextView id, nama;
+        TextView  nama,nim;
 
         public AnggotaHolder(@NonNull View itemView)
         {
             super(itemView);
-            id = itemView.findViewById(R.id.id);
             nama = itemView.findViewById(R.id.nama);
+            nim = itemView.findViewById(R.id.nim);
 
             itemView.setOnClickListener(new View.OnClickListener()
             {
@@ -86,7 +85,7 @@ public class AnggotaAdapter extends RecyclerView.Adapter<AnggotaAdapter.AnggotaH
         }
     }
 
-    private interface OnItemClick
+    public interface OnItemClick
     {
         void click(Anggota anggota);
     }

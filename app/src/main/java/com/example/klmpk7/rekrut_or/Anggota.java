@@ -9,20 +9,20 @@ public class Anggota implements Parcelable
     public String nama;
     public String tmpt_lahir;
     public String tgl_lahir;
-    public String jurusan;
-    public String angkatan;
-    public int target_divisi;
+    public String alamat;
+    public String nim;
     public String motivasi;
+    public String foto;
 
-    public Anggota(int id, String nama, String tmpt_lahir, String tgl_lahir, String jurusan, String angkatan, int target_divisi, String motivasi) {
+    public Anggota(int id, String nama, String tmpt_lahir, String tgl_lahir, String alamat, String nim, String motivasi, String foto) {
         this.id = id;
         this.nama = nama;
         this.tmpt_lahir = tmpt_lahir;
         this.tgl_lahir = tgl_lahir;
-        this.jurusan = jurusan;
-        this.angkatan = angkatan;
-        this.target_divisi = target_divisi;
+        this.alamat = alamat;
+        this.nim = nim;
         this.motivasi = motivasi;
+        this.foto = foto;
     }
 
     @Override
@@ -37,10 +37,10 @@ public class Anggota implements Parcelable
         parcel.writeString(this.nama);
         parcel.writeString(this.tmpt_lahir);
         parcel.writeString(this.tgl_lahir);
-        parcel.writeString(this.jurusan);
-        parcel.writeString(this.angkatan);
-        parcel.writeInt(this.target_divisi);
+        parcel.writeString(this.alamat);
+        parcel.writeString(this.nim);
         parcel.writeString(this.motivasi);
+        parcel.writeString(this.foto);
     }
 
     protected Anggota(Parcel in)
@@ -49,10 +49,10 @@ public class Anggota implements Parcelable
         this.nama = in.readString();
         this.tmpt_lahir = in.readString();
         this.tgl_lahir = in.readString();
-        this.jurusan = in.readString();
-        this.angkatan = in.readString();
-        this.target_divisi = in.readInt();
+        this.alamat = in.readString();
+        this.nim = in.readString();
         this.motivasi = in.readString();
+        this.foto = in.readString();
     }
 
     public static final Parcelable.Creator<Anggota> CREATOR = new Parcelable.Creator<Anggota>()
@@ -69,4 +69,18 @@ public class Anggota implements Parcelable
             return new Anggota[size];
         }
     };
+
+    @Override
+    public String toString() {
+        return "Anggota{" +
+                "id=" + id +
+                ", nama='" + nama + '\'' +
+                ", tmpt_lahir='" + tmpt_lahir + '\'' +
+                ", tgl_lahir='" + tgl_lahir + '\'' +
+                ", alamat='" + alamat + '\'' +
+                ", nim='" + nim + '\'' +
+                ", motivasi='" + motivasi + '\'' +
+                ", foto='" + foto + '\'' +
+                '}';
+    }
 }

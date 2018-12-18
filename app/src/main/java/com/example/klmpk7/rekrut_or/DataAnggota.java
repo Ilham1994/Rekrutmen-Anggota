@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DataAnggota
 {
-    @SerializedName("results")
+    @SerializedName("data")
     @Expose
-    public List<Anggota> results = null;
+    public List<Anggota> data = null;
 }

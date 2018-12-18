@@ -21,14 +21,14 @@ public class ListAnggota
     public String tgl_lahir;
 
     @ColumnInfo(name = "jurusan")
-    public String jurusan;
+    public String alamat;
 
     @ColumnInfo(name = "angkatan")
-    public String angkatan;
-
-    @ColumnInfo(name = "target_divisi")
-    public int target_divisi;
+    public String nim;
 
     @ColumnInfo(name = "motivasi")
     public String motivasi;
+
+    @ColumnInfo(name = "foto")
+    public String foto;
 }
