@@ -28,11 +28,15 @@ import android.widget.Toast;
 import com.example.klmpk7.rekrut_or.Adapter.AnggotaAdapter;
 import com.example.klmpk7.rekrut_or.database.AppDatabase;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
     AnggotaAdapter mAdapter;
     AppDatabase databaseAnggota;
     ImageView image, refresh;
+    Context mContext;
+    apiAnggotaClient mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
+        mContext = this;
 
         Toast.makeText(MainActivity.this, "Silahkan dilihat", Toast.LENGTH_SHORT).show();
         mAdapter = new AnggotaAdapter();
@@ -179,4 +186,5 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
 //        boolean isconnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         return activeNetwork != null;
     }
+
 }

@@ -15,6 +15,15 @@ public interface apiAnggotaClient
     Call<DataAnggota> getAnggotaSekarang(@Url() String url);
 
     @FormUrlEncoded
+    @POST("anggota/post")
+    Call<ResponseBody> storeAnggota(@Field("nama") String nama,
+                                    @Field("tmpt_lahir") String tmpt_lahir,
+                                    @Field("tgl_lahir") String tgl_lahir,
+                                    @Field("alamat") String alamat,
+                                    @Field("nim") String nim,
+                                    @Field("motivasi") String motivasi);
+
+    @FormUrlEncoded
     @POST("anggota/favorit/update")
     Call<ResponseBody> addFavorite(@Field("id") Integer id);
 

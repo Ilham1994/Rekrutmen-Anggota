@@ -2,6 +2,7 @@ package com.example.klmpk7.rekrut_or;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -39,6 +40,7 @@ public class DetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_detail);
 
         mContext = this;
@@ -110,12 +112,14 @@ public class DetailActivity extends AppCompatActivity
     }
 
     public void addFavoriteToServer(View v){
-        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/";
+//        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/api/";
+        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/api/";
 
         Retrofit adapter = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL) //Setting the Root URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build(); //Finally building the adapter
+
 
         mApiService = adapter.create(apiAnggotaClient.class);
 
@@ -134,7 +138,7 @@ public class DetailActivity extends AppCompatActivity
                                 Toast.makeText(mContext, "Anggota Ditambahkan ke Favorit!", Toast.LENGTH_LONG).show();
                             }else{
                                 favoriteImage = findViewById(R.id.unfavorite);
-                                favoriteImage.setImageResource(R.drawable.favorite);
+                                favoriteImage.setImageResource(R.drawable.unfavorite);
                                 Toast.makeText(mContext, "Anggota Dihapus dari Favorit!", Toast.LENGTH_LONG).show();
                             }
 

@@ -159,25 +159,26 @@
         app:layout_constraintStart_toEndOf="@+id/tambah_nama"
         app:layout_constraintTop_toTopOf="@+id/tambah_nama" />
 
-    <ImageButton
-        android:id="@+id/button_foto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="@+id/edit_motivasi"
-        app:layout_constraintTop_toBottomOf="@+id/edit_motivasi"
-        app:srcCompat="@android:drawable/ic_menu_camera" />
-
     <Button
         android:id="@+id/simpan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:text="Save Data"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_foto" />
+        app:layout_constraintTop_toBottomOf="@+id/edit_foto" />
+
+    <ImageView
+        android:id="@+id/edit_foto"
+        android:layout_width="92dp"
+        android:layout_height="105dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/edit_motivasi"
+        app:layout_constraintTop_toBottomOf="@+id/edit_motivasi"
+        app:srcCompat="@android:drawable/ic_menu_camera" />
 
 </android.support.constraint.ConstraintLayout>
