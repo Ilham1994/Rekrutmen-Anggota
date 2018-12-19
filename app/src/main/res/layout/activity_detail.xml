@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="64dp"
-        android:text="@string/textview"
+        android:text="@string/textview10"
         app:layout_constraintStart_toEndOf="@+id/textView10"
         app:layout_constraintTop_toTopOf="@+id/textView10" />
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/textview"
+        android:text="@string/textview11"
         app:layout_constraintStart_toStartOf="@+id/nim"
         app:layout_constraintTop_toBottomOf="@+id/nim" />
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/textview"
+        android:text="@string/textview12"
         app:layout_constraintStart_toStartOf="@+id/nama"
         app:layout_constraintTop_toBottomOf="@+id/nama" />
 
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/textview"
+        android:text="@string/textview13"
         app:layout_constraintStart_toStartOf="@+id/tmpt_lahir"
         app:layout_constraintTop_toBottomOf="@+id/tmpt_lahir" />
 
@@ -61,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/textview"
+        android:text="@string/textview14"
         app:layout_constraintStart_toStartOf="@+id/tgl_lahir"
         app:layout_constraintTop_toBottomOf="@+id/tgl_lahir" />
 
@@ -70,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/textview"
+        android:text="@string/textview15"
         app:layout_constraintStart_toStartOf="@+id/alamat"
         app:layout_constraintTop_toBottomOf="@+id/alamat" />
 
@@ -150,11 +150,10 @@
         android:layout_height="wrap_content"
         android:background="#00ffffff"
         android:clickable="true"
-        app:srcCompat="@drawable/ic_favorite_border_black_24dp"
-        tools:layout_editor_absoluteX="284dp"
-        tools:layout_editor_absoluteY="233dp"
-        tools:ignore="MissingConstraints"
         android:contentDescription="@string/todo"
-        android:focusable="true" />
+        android:focusable="true"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="284dp"
+        tools:layout_editor_absoluteY="233dp" />
 
 </android.support.constraint.ConstraintLayout>

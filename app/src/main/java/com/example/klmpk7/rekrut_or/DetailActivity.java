@@ -65,7 +65,8 @@ public class DetailActivity extends AppCompatActivity
                 + "Tanggal Lahir: " + dataTanggal+ "\n"
                 + "Alamat: " + dataAlamat + "\n"
                 + "Motivasi: " + dataMotivasi + "\n");
-        if (shareIntent.resolveActivity(getPackageManager()) != null){
+        if (shareIntent.resolveActivity(getPackageManager()) != null)
+        {
             startActivity(shareIntent);
         }
     }

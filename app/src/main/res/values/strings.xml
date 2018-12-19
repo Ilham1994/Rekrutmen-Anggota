@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Rekrutmen Anggota</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
-    <string name="textview">TextView</string>
+    <string name="textview10">TextView</string>
+    <string name="textview11">TextView</string>
+    <string name="textview12">TextView</string>
+    <string name="textview13">TextView</string>
+    <string name="textview14">TextView</string>
+    <string name="textview15">TextView</string>
     <string name="nim">NIM :</string>
     <string name="nama">Nama :</string>
     <string name="tempat_lahir">Tempat Lahir :</string>
@@ -14,5 +14,5 @@
     <string name="motivasi">Motivasi :</string>
     <string name="share">Share</string>
     <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
+    <!--<string name="todo">TODO</string>-->
 </resources>

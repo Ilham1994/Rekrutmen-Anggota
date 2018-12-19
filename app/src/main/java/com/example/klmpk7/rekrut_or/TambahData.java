@@ -12,29 +12,30 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TambahData extends AppCompatActivity implements View.OnClickListener{
-
+public class TambahData extends AppCompatActivity implements View.OnClickListener
+{
     private EditText mtambahNama,mtambahNim,mtambahTempat,mtambahTanggal,mtambahAlamat,mtambahMotivasi;
     private ImageButton btnFoto;
     private Button save;
     //private TextView tambahNama,tambahNim,tambahTempat,tambahTanggal,tambahAlamat,tambahMotivasi;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
-        super.onCreate(savedInstanceState, persistentState);
+    public void onCreate(@Nullable Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.tambah_anggota);
 
-        try {
-            String hNama = mtambahNama.getText().toString();//getdata
-            String hNim = mtambahNim.getText().toString();
-            String hTempat = mtambahTempat.getText().toString();
-            String hTanggal = mtambahTanggal.getText().toString();
-            String hAlamat = mtambahAlamat.getText().toString();
-            String hMotivasi = mtambahMotivasi.getText().toString();
-
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
-        }
+//        try {
+//            String hNama = mtambahNama.getText().toString();//getdata
+//            String hNim = mtambahNim.getText().toString();
+//            String hTempat = mtambahTempat.getText().toString();
+//            String hTanggal = mtambahTanggal.getText().toString();
+//            String hAlamat = mtambahAlamat.getText().toString();
+//            String hMotivasi = mtambahMotivasi.getText().toString();
+//
+//        } catch (NumberFormatException e) {
+//            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
+//        }
 
     }
 

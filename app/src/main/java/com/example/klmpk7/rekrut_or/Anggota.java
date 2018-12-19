@@ -13,8 +13,9 @@ public class Anggota implements Parcelable
     public String nim;
     public String motivasi;
     public String foto;
+    public boolean favorit;
 
-    public Anggota(int id, String nama, String tmpt_lahir, String tgl_lahir, String alamat, String nim, String motivasi, String foto) {
+    public Anggota(int id, String nama, String tmpt_lahir, String tgl_lahir, String alamat, String nim, String motivasi, String foto, boolean favorit) {
         this.id = id;
         this.nama = nama;
         this.tmpt_lahir = tmpt_lahir;
@@ -23,6 +24,7 @@ public class Anggota implements Parcelable
         this.nim = nim;
         this.motivasi = motivasi;
         this.foto = foto;
+        this.favorit = favorit;
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Anggota implements Parcelable
     @Override
     public void writeToParcel(Parcel parcel, int flags)
     {
+        boolean myBoolean = true;
         parcel.writeInt(this.id);
         parcel.writeString(this.nama);
         parcel.writeString(this.tmpt_lahir);
@@ -41,6 +44,7 @@ public class Anggota implements Parcelable
         parcel.writeString(this.nim);
         parcel.writeString(this.motivasi);
         parcel.writeString(this.foto);
+        parcel.writeByte((byte)(myBoolean ? 1 : 0));
     }
 
     protected Anggota(Parcel in)
@@ -53,6 +57,7 @@ public class Anggota implements Parcelable
         this.nim = in.readString();
         this.motivasi = in.readString();
         this.foto = in.readString();
+        this.favorit = in.readByte() != 0;
     }
 
     public static final Parcelable.Creator<Anggota> CREATOR = new Parcelable.Creator<Anggota>()

@@ -48,8 +48,6 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
     AppDatabase databaseAnggota;
     ImageView image, refresh;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
                     getAnggotaSekarangList();
                 }
                 break;
+            case R.id.af:
+                getFavorit();
+                break;
         }
          return super.onOptionsItemSelected(item);
     }
@@ -115,6 +116,12 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         startActivity(insertActivityIntent);
     }
 
+    private void getFavorit()
+    {
+        Intent favoritActivityIntent = new Intent(this, FavoritActivity.class);
+        startActivity(favoritActivityIntent);
+    }
+
     @Override
     public void click(Anggota anggota)
     {
@@ -128,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         progressBar.setVisibility(View.VISIBLE);
         mRecyclerview.setVisibility(View.INVISIBLE);
 
+        if(isConnected())
+        {
             //Ambil Data
             apiAnggotaClient client = (new Retrofit.Builder()
                     .baseUrl("https://cryptic-ridge-20830.herokuapp.com/")
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
                     mRecyclerview.setVisibility(View.VISIBLE);
                 }
             });
-//        }
+        }
     }
 
     private boolean isConnected()
