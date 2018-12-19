@@ -21,7 +21,8 @@ public interface apiAnggotaClient
                                     @Field("tgl_lahir") String tgl_lahir,
                                     @Field("alamat") String alamat,
                                     @Field("nim") String nim,
-                                    @Field("motivasi") String motivasi);
+                                    @Field("motivasi") String motivasi,
+                                    @Field("foto") String foto);
 
     @FormUrlEncoded
     @POST("anggota/favorit/update")
@@ -29,4 +30,6 @@ public interface apiAnggotaClient
 
     @GET("anggota/favorite")
     Call<DataAnggota> getFavoriteAnggota();
+
+    apiAnggotaClient storeAnggota(String s, String s1, String s2, String s3, String s4, String s5);
 }

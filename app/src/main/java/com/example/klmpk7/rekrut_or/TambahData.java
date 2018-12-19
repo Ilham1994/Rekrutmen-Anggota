@@ -1,5 +1,6 @@
 package com.example.klmpk7.rekrut_or;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -42,24 +43,28 @@ public class TambahData extends AppCompatActivity implements View.OnClickListene
     Bitmap imageBitmap;
     ImageView imgView;
     String imagebase64string;
+    Context mContext;
+    apiAnggotaClient mApiService;
+    EditText hNama,hNim,hTempat,hTanggal,hAlamat,hMotivasi;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tambah_anggota);
+        mContext = this;
 
-//        try {
-//            String hNama = mtambahNama.getText().toString();//getdata
-//            String hNim = mtambahNim.getText().toString();
-//            String hTempat = mtambahTempat.getText().toString();
-//            String hTanggal = mtambahTanggal.getText().toString();
-//            String hAlamat = mtambahAlamat.getText().toString();
-//            String hMotivasi = mtambahMotivasi.getText().toString();
-//
-//        } catch (NumberFormatException e) {
-//            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
-//        }
+        try {
+            String hNama = mtambahNama.getText().toString();//getdata
+            String hNim = mtambahNim.getText().toString();
+            String hTempat = mtambahTempat.getText().toString();
+            String hTanggal = mtambahTanggal.getText().toString();
+            String hAlamat = mtambahAlamat.getText().toString();
+            String hMotivasi = mtambahMotivasi.getText().toString();
+
+        } catch (NumberFormatException e) {
+            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
+        }
 
         ImageView button = (ImageView) findViewById(R.id.edit_foto);
         button.setOnClickListener(new View.OnClickListener() {
@@ -137,7 +142,14 @@ public class TambahData extends AppCompatActivity implements View.OnClickListene
 
         mApiService = adapter.create(apiAnggotaClient.class);
 
-        mApiService.storeAnggota().addFavorite(1).enqueue(new Callback<ResponseBody>() {
+        mApiService.storeAnggota(
+                hNama.getText().toString(),
+                hTempat.getText().toString(),
+                hTanggal.getText().toString(),
+                hAlamat.getText().toString(),
+                hNim.getText().toString(),
+                hMotivasi.getText().toString()
+        ).addFavorite(1).enqueue(new Callback<ResponseBody>() {
 
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -146,15 +158,7 @@ public class TambahData extends AppCompatActivity implements View.OnClickListene
                         JSONObject jsonRESULTS = new JSONObject(response.body().string());
                         if (jsonRESULTS.getString("status").equals("success")){
 
-                            if(jsonRESULTS.getString("data").equals(1)){
-                                favoriteImage = findViewById(R.id.unfavorite);
-                                favoriteImage.setImageResource(R.drawable.unfavorite);
-                                Toast.makeText(mContext, "Anggota Ditambahkan ke Favorit!", Toast.LENGTH_LONG).show();
-                            }else{
-                                favoriteImage = findViewById(R.id.unfavorite);
-                                favoriteImage.setImageResource(R.drawable.unfavorite);
-                                Toast.makeText(mContext, "Anggota Dihapus dari Favorit!", Toast.LENGTH_LONG).show();
-                            }
+
 
                         } else {
                             String error_message = jsonRESULTS.getString("error_msg");
