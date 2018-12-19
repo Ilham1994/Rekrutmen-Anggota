@@ -4,21 +4,17 @@
 
     <item
         android:id="@+id/menu_refresh"
-        android:title="Refresh" />
-    <item
-        android:id="@+id/menu_tambah"
-        android:title="Tambah Anggota" />
-    <item
-        android:id="@+id/af"
-        android:title="Anggota Favorit" />
-    <item
-        android:id="@+id/menu_refresh1"
-        android:icon="@android:drawable/stat_notify_sync"
-        android:title="Item"
+        android:icon="@android:drawable/ic_popup_sync"
+        android:title="Refresh"
         app:showAsAction="always" />
     <item
-        android:id="@+id/menu_tambah1"
+        android:id="@+id/menu_tambah"
         android:icon="@android:drawable/ic_menu_add"
-        android:title="Tambah"
+        android:title="Tambah Anggota"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/af"
+        android:icon="@drawable/unfavorite"
+        android:title="Anggota Favorit"
         app:showAsAction="always" />
 </menu>
