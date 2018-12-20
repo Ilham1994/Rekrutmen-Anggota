@@ -25,18 +25,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.klmpk7.rekrut_or.Adapter.AnggotaAdapter;
 import com.example.klmpk7.rekrut_or.database.AppDatabase;
+import com.example.klmpk7.rekrut_or.database.ListAnggota;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.w3c.dom.Text;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,8 +49,6 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
     AnggotaAdapter mAdapter;
     AppDatabase databaseAnggota;
     ImageView image, refresh;
-    Context mContext;
-    apiAnggotaClient mApiService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,9 +58,8 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
         progressBar = findViewById(R.id.progressBar);
         progressBar.setVisibility(View.INVISIBLE);
 
-        mContext = this;
 
-        Toast.makeText(MainActivity.this, "Silahkan dilihat", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(MainActivity.this, "Silahkan dilihat", Toast.LENGTH_SHORT).show();
         mAdapter = new AnggotaAdapter();
         mAdapter.setHandler(this);
 
@@ -144,6 +139,8 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
 
         if(isConnected())
         {
+            Toast.makeText(MainActivity.this,"Internet tersedia, mengambil data", Toast.LENGTH_SHORT).show();
+
             //Ambil Data
             apiAnggotaClient client = (new Retrofit.Builder()
                     .baseUrl("https://cryptic-ridge-20830.herokuapp.com/")
@@ -161,7 +158,9 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
 
                     mAdapter.setDataAnggota(new ArrayList<Anggota>(data));
 
-//                    saveAnggotaKeDB(data);
+                    //save data ke dalam database
+                    saveAnggotaKeDB(data);
+
                     progressBar.setVisibility(View.INVISIBLE);
                     mRecyclerview.setVisibility(View.VISIBLE);
                 }
@@ -176,6 +175,63 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
                 }
             });
         }
+        else
+        {
+
+            Toast.makeText(MainActivity.this, "Internet tidak terhubung", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Mengambil data lokal", Toast.LENGTH_SHORT).show();
+
+            List<ListAnggota> listAnggotas = databaseAnggota.listanggotaDao().getDataAnggota();
+            ArrayList<Anggota> anggotas = new ArrayList<>();
+            for(ListAnggota n : listAnggotas)
+            {
+                Anggota m = new Anggota(
+                        n.id,
+                        n.nama,
+                        n.tmpt_lahir,
+                        n.tgl_lahir,
+                        n.alamat,
+                        n.nim,
+                        n.motivasi,
+                        n.foto,
+                        n.favorit
+                );
+                anggotas.add(m);
+            }
+            mAdapter.setDataAnggota(anggotas);
+
+            progressBar.setVisibility(View.INVISIBLE);
+            mRecyclerview.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void saveAnggotaKeDB(final List<Anggota>results)
+    {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                for(Anggota m:results)
+                {
+                    ListAnggota listAnggota = new ListAnggota();
+                    listAnggota.id = m.id;
+                    listAnggota.nama = m.nama;
+                    listAnggota.tmpt_lahir = m.tmpt_lahir;
+                    listAnggota.tgl_lahir = m.tgl_lahir;
+                    listAnggota.alamat = m.alamat;
+                    listAnggota.nim = m.nim;
+                    listAnggota.motivasi = m.motivasi;
+                    listAnggota.foto = m.foto;
+                    listAnggota.favorit = m.favorit;
+
+                    databaseAnggota.listanggotaDao().insertAnggotaSekarang(listAnggota);
+
+//                    Glide.with(this).load(listAnggota.foto).asBitmap().into(newSimpleTarget<Bitmap>(100,100))
+//                    {
+//
+//                    }
+                }
+            }
+        }).start();
     }
 
     private boolean isConnected()
@@ -186,5 +242,4 @@ public class MainActivity extends AppCompatActivity implements AnggotaAdapter.On
 //        boolean isconnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting();
         return activeNetwork != null;
     }
-
 }

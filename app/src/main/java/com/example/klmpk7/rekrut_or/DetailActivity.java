@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.bumptech.glide.Glide;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -29,10 +31,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DetailActivity extends AppCompatActivity
 {
     TextView nim, nama, tmptLahir, tglLahir, alamat, motivasi;
-    ImageView favoriteImage;
+    ImageView foto;
+
     apiAnggotaClient mApiService;
     Integer id;
     Boolean favorit;
+    ImageView favoriteImage;
 
     Context mContext;
 
@@ -41,7 +45,14 @@ public class DetailActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_detail);
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        {
+            setContentView(R.layout.activity_detail);
+        }
+        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)
+        {
+            setContentView(R.layout.activity_detail_landscape);
+        }
 
         mContext = this;
 
@@ -51,12 +62,13 @@ public class DetailActivity extends AppCompatActivity
         tglLahir = findViewById(R.id.tgl_lahir);
         alamat = findViewById(R.id.alamat);
         motivasi = findViewById(R.id.motivasi);
+        foto = findViewById(R.id.imageView);
 
         Intent intent = getIntent();
+
         if(intent != null)
         {
             Anggota anggota = intent.getParcelableExtra("anggota_extra_key");
-            id = anggota.id;
             nim.setText(anggota.nim);
             nama.setText(anggota.nama);
             tmptLahir.setText(anggota.tmpt_lahir);
@@ -64,14 +76,18 @@ public class DetailActivity extends AppCompatActivity
             alamat.setText(anggota.alamat);
             motivasi.setText(anggota.motivasi);
             favorit = anggota.favorit;
+
+            String url_gambar = "https://cryptic-ridge-20830.herokuapp.com/img/" + anggota.foto;
+            Glide.with(this)
+                    .load(url_gambar)
+                    .into(foto);
+
         }
 
         Button button = (Button) findViewById(R.id.share);
-        button.setOnClickListener(new View.OnClickListener()
-        {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 shareText(v);
             }
         });
@@ -79,7 +95,8 @@ public class DetailActivity extends AppCompatActivity
         changeIconFavorite();
     }
 
-    public void changeIconFavorite(){
+    private void changeIconFavorite()
+    {
         if(favorit.equals(true)){
             favoriteImage = findViewById(R.id.unfavorite);
             favoriteImage.setImageResource(R.drawable.favorite);
@@ -89,37 +106,13 @@ public class DetailActivity extends AppCompatActivity
         }
     }
 
-    public void shareText(View view){
-        String dataNim = nim.getText().toString();
-        String dataNama= nama.getText().toString();
-        String dataTempat= tmptLahir.getText().toString();
-        String dataTanggal= tglLahir.getText().toString();
-        String dataAlamat= alamat.getText().toString();
-        String dataMotivasi= motivasi.getText().toString();
-
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, "NIM: " + dataNim + "\n"
-                + "Nama: " + dataNama + "\n"
-                + "Tempat Lahir: " + dataTempat + "\n"
-                + "Tanggal Lahir: " + dataTanggal+ "\n"
-                + "Alamat: " + dataAlamat + "\n"
-                + "Motivasi: " + dataMotivasi + "\n");
-        if (shareIntent.resolveActivity(getPackageManager()) != null)
-        {
-            startActivity(shareIntent);
-        }
-    }
-
     public void addFavoriteToServer(View v){
-//        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/api/";
-        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/api/";
+        String API_BASE_URL = "https://cryptic-ridge-20830.herokuapp.com/";
 
         Retrofit adapter = new Retrofit.Builder()
                 .baseUrl(API_BASE_URL) //Setting the Root URL
                 .addConverterFactory(GsonConverterFactory.create())
                 .build(); //Finally building the adapter
-
 
         mApiService = adapter.create(apiAnggotaClient.class);
 
@@ -138,7 +131,7 @@ public class DetailActivity extends AppCompatActivity
                                 Toast.makeText(mContext, "Anggota Ditambahkan ke Favorit!", Toast.LENGTH_LONG).show();
                             }else{
                                 favoriteImage = findViewById(R.id.unfavorite);
-                                favoriteImage.setImageResource(R.drawable.unfavorite);
+                                favoriteImage.setImageResource(R.drawable.favorite);
                                 Toast.makeText(mContext, "Anggota Dihapus dari Favorit!", Toast.LENGTH_LONG).show();
                             }
 
@@ -164,6 +157,28 @@ public class DetailActivity extends AppCompatActivity
                 Log.e("debug", "onFailure: ERROR > " + t.toString());
             }
         });
+    }
+
+    public void shareText(View view){
+        String dataNim = nim.getText().toString();
+        String dataNama= nama.getText().toString();
+        String dataTempat= tmptLahir.getText().toString();
+        String dataTanggal= tglLahir.getText().toString();
+        String dataAlamat= alamat.getText().toString();
+        String dataMotivasi= motivasi.getText().toString();
+
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, "NIM: " + dataNim + "\n"
+                + "Nama: " + dataNama + "\n"
+                + "Tempat Lahir: " + dataTempat + "\n"
+                + "Tanggal Lahir: " + dataTanggal+ "\n"
+                + "Alamat: " + dataAlamat + "\n"
+                + "Motivasi: " + dataMotivasi + "\n");
+        if (shareIntent.resolveActivity(getPackageManager()) != null)
+        {
+            startActivity(shareIntent);
+        }
     }
 
 }

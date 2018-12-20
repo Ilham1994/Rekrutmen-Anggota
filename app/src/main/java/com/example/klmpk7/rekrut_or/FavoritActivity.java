@@ -46,8 +46,6 @@ public class FavoritActivity extends AppCompatActivity
     }
     private void getAnggotaFavSekarangList()
     {
-
-
         if(isConnected())
         {
             //Ambil Data
@@ -58,8 +56,6 @@ public class FavoritActivity extends AppCompatActivity
                     .create(apiAnggotaClient.class);
 
             Call<DataAnggota> call = client.getAnggotaSekarang("api/anggota/favorit");
-            String u = client.getAnggotaSekarang("api/anggota/favorit").request().url().toString();
-            Log.d("url","a" + u);
 
             call.enqueue(new Callback<DataAnggota>() {
                 @Override
@@ -69,6 +65,7 @@ public class FavoritActivity extends AppCompatActivity
                     Log.d("sample","aa" + data);
                     afAdapter.setDataAnggota(new ArrayList<Anggota>(data));
 
+                    Log.d("url","a");
 //                    saveAnggotaKeDB(data);
                 }
 
@@ -76,7 +73,6 @@ public class FavoritActivity extends AppCompatActivity
                 public void onFailure(Call<DataAnggota> call, Throwable t)
                 {
                     Toast.makeText(FavoritActivity.this, "Data gagal diambil", Toast.LENGTH_SHORT).show();
-
                 }
             });
         }

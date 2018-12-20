@@ -31,4 +31,7 @@ public class ListAnggota
 
     @ColumnInfo(name = "foto")
     public String foto;
+
+    @ColumnInfo(name = "favorit")
+    public boolean favorit;
 }

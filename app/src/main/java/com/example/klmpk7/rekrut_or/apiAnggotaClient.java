@@ -24,11 +24,12 @@ public interface apiAnggotaClient
                                     @Field("motivasi") String motivasi,
                                     @Field("foto") String foto);
 
+
     @FormUrlEncoded
     @POST("anggota/favorit/update")
     Call<ResponseBody> addFavorite(@Field("id") Integer id);
 
-    @GET("anggota/favorite")
+    @GET("anggota/favorit")
     Call<DataAnggota> getFavoriteAnggota();
 
     apiAnggotaClient storeAnggota(String s, String s1, String s2, String s3, String s4, String s5);

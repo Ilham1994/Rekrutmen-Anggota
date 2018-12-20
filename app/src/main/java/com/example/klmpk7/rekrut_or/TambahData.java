@@ -54,17 +54,27 @@ public class TambahData extends AppCompatActivity implements View.OnClickListene
         setContentView(R.layout.tambah_anggota);
         mContext = this;
 
-        try {
-            String hNama = mtambahNama.getText().toString();//getdata
-            String hNim = mtambahNim.getText().toString();
-            String hTempat = mtambahTempat.getText().toString();
-            String hTanggal = mtambahTanggal.getText().toString();
-            String hAlamat = mtambahAlamat.getText().toString();
-            String hMotivasi = mtambahMotivasi.getText().toString();
+        mtambahNama = findViewById(R.id.edit_nama);
+        mtambahNim = findViewById(R.id.edit_nim);
+        mtambahTempat = findViewById(R.id.edit_tempat_lahir);
+        mtambahTanggal = findViewById(R.id.edit_tanggal_lahir);
+        mtambahAlamat = findViewById(R.id.edit_alamat);
+        mtambahMotivasi = findViewById(R.id.edit_motivasi);
 
-        } catch (NumberFormatException e) {
-            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
-        }
+//        Button simpanAnggota = findViewById(R.id.simpan);
+//        btnCreate
+
+//        try {
+//            String hNama = mtambahNama.getText().toString();//getdata
+//            String hNim = mtambahNim.getText().toString();
+//            String hTempat = mtambahTempat.getText().toString();
+//            String hTanggal = mtambahTanggal.getText().toString();
+//            String hAlamat = mtambahAlamat.getText().toString();
+//            String hMotivasi = mtambahMotivasi.getText().toString();
+//
+//        } catch (NumberFormatException e) {
+//            Toast.makeText(this, "Data tidak boleh kosong", Toast.LENGTH_LONG).show();
+//        }
 
         ImageView button = (ImageView) findViewById(R.id.edit_foto);
         button.setOnClickListener(new View.OnClickListener() {
@@ -77,15 +87,7 @@ public class TambahData extends AppCompatActivity implements View.OnClickListene
     }
 
     public void inputAnggota(View v) {
-        mtambahNama = findViewById(R.id.edit_nama);
-        mtambahNim = findViewById(R.id.edit_nim);
-        mtambahTempat = findViewById(R.id.edit_tempat_lahir);
-        mtambahTanggal = findViewById(R.id.edit_tanggal_lahir);
-        mtambahAlamat = findViewById(R.id.edit_alamat);
-        mtambahMotivasi = findViewById(R.id.edit_motivasi);
-//        btnFoto = findViewById(R.id.button_foto);
 
-        save = findViewById(R.id.simpan);
 
     }
 

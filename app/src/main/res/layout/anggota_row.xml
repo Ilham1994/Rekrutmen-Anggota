@@ -7,9 +7,9 @@
     tools:layout_editor_absoluteY="81dp">
 
     <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="100dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -25,7 +25,7 @@
         android:layout_marginStart="28dp"
         android:layout_marginTop="36dp"
         android:text="NIM : "
-        app:layout_constraintStart_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -38,13 +38,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="@+id/textView"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.661" />
 
     <TextView
         android:id="@+id/nim"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="36dp"
         android:text="TextView"
         app:layout_constraintStart_toEndOf="@+id/textView"
@@ -54,13 +54,12 @@
         android:id="@+id/nama"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="16dp"
         android:text="TextView"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintStart_toStartOf="@+id/nim"
         app:layout_constraintTop_toBottomOf="@+id/nim"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintVertical_bias="0.352" />
 
 </android.support.constraint.ConstraintLayout>
